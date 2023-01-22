@@ -1,3 +1,6 @@
+create database atsrecruiter;
+\c atsrecruiter
+
 create table locations (
   id bigserial primary key,
   country varchar(255) not null,
@@ -100,51 +103,12 @@ create table job_interviews(
   notes varchar(255)
 );
 
-
-
-##Query 1 for job id 10;
-SELECT c.name, c.email, c.phoneno, c.resume_link, a.applied_date, a.applied_status
-FROM job_applications a
-JOIN candidates c ON a.candidateid = c.id
-WHERE a.jobid = 10;
-
-##Query 2 for input search 'io'
-SELECT c.name, c.email, j.title as job_title
-FROM candidates c
-JOIN job_applications a ON c.id = a.candidateid
-JOIN job_postings j ON a.jobid = j.id
-WHERE c.email ILIKE '%io%' OR c.name ILIKE '%io%' OR j.title ILIKE '%io%';
-
-##Query 3 is pending
-WITH last_6_months AS (
-    SELECT date_trunc('month', NOW()) - INTERVAL '6 month' as start_date,
-           date_trunc('month', NOW()) as end_date
-)
-
-SELECT
-(SELECT COUNT(*) FROM job_openings WHERE job_postings.posting_date BETWEEN last_6_months.start_date AND last_6_months.end_date) AS job_openings_created,
-(SELECT COUNT(*) from job_openings WHERE ((job_postings.posting_date <= last_6_months.end_date ) OR (job_postings.posting_date >= last_6_months.start_date AND job_postings.posting_date <= last_6_months.end_date)) AND  job_postings.job_status = 'closed') AS job_openings_closed,
-(SELECT COUNT(*) FROM job_applications WHERE job_applications.applied_date BETWEEN last_6_months.start_date AND last_6_months.end_date) AS job_applications_received,
-(SELECT COUNT(*) FROM job_applications WHERE job_applications.applied_date BETWEEN last_6_months.start_date AND last_6_months.end_date AND job_applications.status = 'Recruited') AS number_of_candidates_recruited,
-(SELECT COUNT(*) FROM job_applications WHERE job_applications.applied_date BETWEEN last_6_months.start_date AND last_6_months.end_date AND job_applications.status = 'Rejected') AS number_of_candidates_rejected,
-(SELECT COUNT(*) FROM job_application WHERE job_applications.jobid IN (SELECT job_postings.id FROM job_postings WHERE job_postings.posting_date BETWEEN last_6_months.start_date AND last_6_months.end_date))/
-(SELECT COUNT(*) FROM job_postings WHERE job_postings.posting_date BETWEEN last_6_months.start_date AND last_6_months.end_date) AS average_applications_per_job_opening;
-
-##Query 4
-SELECT j.title as job_title, s.stage as stage_name
-FROM candidates c
-join job_applications a on c.id = a.candidateid
-join job_postings j on a.jobid = j.id 
-join job_interviews i on a.id = i.applicationid
-join interview_stages s on i.stageid = s.id
-where c.id = 10;
-
-##Query 5
-SELECT j.title as job_title, s.stage as stage_name, count(s.stage) as number_of_candidates
-FROM job_postings j
-join job_applications a on j.id = a.jobid
-join job_interviews i on a.id = i.applicationid
-join interview_stages s on i.stageid = s.id
-where j.id = 10
-GROUP BY s.stage, j.title
-ORDER BY s.stage;
+create index locations_country_state_city_idx on locations(country,state,city);
+create index idx_addresses_location_id on addresses(location_id);
+create index recruiters_idx on recruiters(id,company_name);
+create index candidates_idx on candidates(id,resume_link);
+create index job_postings_idx on job_postings(id,posting_date,job_status,closing_date);
+create index jobopening_levels_idx on jobopening_levels(id,jobid,skills);
+create index interview_stages_idx on interview_stages(id,levelid,stage);
+create index job_applications_idx on job_applications(jobid,candidateid,applied_date,applied_status);
+create index job_interviews_idx on job_interviews(jobid,applicationid,stageid);
