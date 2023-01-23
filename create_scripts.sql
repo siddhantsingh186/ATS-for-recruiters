@@ -53,6 +53,18 @@ create table job_postings(
   foreign key (recruiterid) references recruiters(id) on delete set null
 );
 
+ALTER TABLE job_postings
+ADD CONSTRAINT check_closing_date CHECK (
+  (status = 'closed' AND closing_date IS NOT NULL) OR 
+  (status = 'open' AND closing_date IS NULL)
+);
+
+ALTER TABLE job_postings
+ADD CONSTRAINT closing_gte_opening_date CHECK (
+  (job_status = 'closed' AND closing_date >= posting_date) OR 
+  (job_status = 'open' AND closing_date IS NULL)
+);
+
 create table jobopening_levels(
   id bigserial primary key not null,
   jobid bigint not null references job_postings(id),
@@ -92,6 +104,11 @@ create table job_applications(
   documents varchar(255),
   applied_status varchar(255),
   last_updated timestamp not null default now()
+);
+
+ALTER TABLE job_applications
+ADD CONSTRAINT check_applied_status CHECK (
+  last_updated >= applied_date
 );
 
 create table job_interviews(

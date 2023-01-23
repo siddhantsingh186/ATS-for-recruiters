@@ -1,29 +1,3 @@
-## Inserting data into locations table
-
-insert into locations (country, state, city) values ('India', 'Uttar Pradesh', 'Lucknow');
-insert into locations (country, state, city) values ('India', 'Gujarat', 'Ahmedabad');
-insert into locations (country, state, city) values ('India', 'Uttar Pradesh', 'Varanasi');
-insert into locations (country, state, city) values ('India', 'Rajasthan', 'Jaipur');
-insert into locations (country, state, city) values ('India', 'Gujarat', 'Gandhinagar');
-insert into locations (country, state, city) values ('India', 'Uttarakhand', 'Dehradoon');
-insert into locations (country, state, city) values ('India', 'Uttar Pradesh', 'Prayagraj');
-insert into locations (country, state, city) values ('India', 'Maharashtra', 'Mumbai');
-insert into locations (country, state, city) values ('India', 'Telangana', 'Hyderabad');
-insert into locations (country, state, city) values ('India', 'Karnataka', 'Bangalore');
-
-## Inserting data into addresses table
-
-insert into addresses (location_id, housenumber, pincode) values (2, '47/A', '221005');
-insert into addresses (location_id, housenumber, pincode) values (3, 'C-1/3', '500001');
-insert into addresses (location_id, housenumber, pincode) values (6, '83', '110001');
-insert into addresses (location_id, housenumber, pincode) values (10, '22', '345678');
-insert into addresses (location_id, housenumber, pincode) values (8, '7', '567689');
-insert into addresses (location_id, housenumber, pincode) values (4, '89/I', '221005');
-insert into addresses (location_id, housenumber, pincode) values (5, '97', '320002');
-insert into addresses (location_id, housenumber, pincode) values (3, '65', '347890');
-insert into addresses (location_id, housenumber, pincode) values (2, 'N-1/66', '234567');
-insert into addresses (location_id, housenumber, pincode) values (6, '24', '110001');
-
 ## Inserting data into users table
 
 insert into users (name, email, password, phoneno, addressid) values ('Todd Wealleans', 'twealleans0@youtube.com', 'mjwe3Ika9eW', '+92 (543) 622-0948', 2);
@@ -46,7 +20,3 @@ insert into users (name, email, password, phoneno, addressid) values ('Isiahi Je
 insert into users (name, email, password, phoneno, addressid) values ('Korney Perigoe', 'kperigoe7@cbslocal.com', '3mcghB6fSlVz', '+86 (325) 775-8862', 10);
 insert into users (name, email, password, phoneno, addressid) values ('Ivory Doohey', 'idoohey8@google.cn', '8OkVWiP', '+1 (657) 772-3684', 4);
 insert into users (name, email, password, phoneno, addressid) values ('Omero Daddow', 'odaddow9@dion.ne.jp', 'K3EwTCnQMN', '+86 (524) 753-6861', 3);
-
-## Inserting data into recruiters table
-
-
