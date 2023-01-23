@@ -28,14 +28,16 @@ create table users(
 );
 
 create table recruiters (
-    id bigserial primary key not null,
-    company_name varchar(255) not null
-) inherits (users);
+  id bigserial primary key not null,
+  userid bigint references users(id),
+  company_name varchar(255) not null
+);
 
 create table candidates (
-    id bigserial primary key not null,
-    resume_link varchar(255) not null
-) inherits (users);
+  id bigserial primary key not null,
+  userid bigint references users(id),
+  resume_link varchar(255) not null
+);
 
 create table job_postings(
   id bigserial primary key not null,
