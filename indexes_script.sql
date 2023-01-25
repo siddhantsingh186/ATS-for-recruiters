@@ -1,0 +1,13 @@
+create unique index locations_country_state_city_index on locations(country,state,city);
+create index addresses_location_id_index on addresses(location_id);
+create unique index users_email_index om users(email);
+create index recruiters_company_name_index on recruiters(company_name);
+create index candidates_resume_link_index on candidates(resume_link);
+create index job_postings_job_state_index on job_postings(job_state);
+create index jobopening_levels_jobid_index on jobopening_levels(jobid);
+create index interview_stages_stage_index on interview_stages(stage);
+create index interview_stages_levelid_index on interview_stages(levelid);
+create index job_applications_applied_state_index on job_applications(applied_state);
+create index job_applications_candidateid_index on job_applications(candidateid);
+create index job_interviews_applicationid_index on job_interviews(applicationid);
+create index job_interviews_stageid_index on job_interviews(stageid);

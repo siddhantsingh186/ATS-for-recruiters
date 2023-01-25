@@ -50,7 +50,7 @@
 | work_location | [varchar(255)][PlGh]|
 | posting_date | [timestamp, not null][PlOd] |
 | closing_date | [timestamp][PlMe] |
-| job_status | [varchar(255),not null][PlGa] |
+| job_state | [varchar(255),not null][PlGa] |
 | posted_through | [varchar(255)][PlGa]|
 
 ### jobopening_levels
@@ -92,7 +92,7 @@
 | candidateid | [bigint, not null, foreign key][PlGh]|
 | applied_date | [timestamp][PlGh]|
 | documents | [varchar(255)][PlGh]|
-| applied_status | [varchar(255)][PlGh]|
+| applied_state | [varchar(255)][PlGh]|
 | last_updated | [timestamp, not null][PlGh]|
 
 ### job_interviews
